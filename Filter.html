@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table Filtering with Dropdown</title>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<select id="filterSelect">
+  <option value="">All</option>
+  <option value="apple">Apple</option>
+  <option value="banana">Banana</option>
+  <option value="orange">Orange</option>
+</select>
+
+<table id="dataTable">
+  <thead>
+    <tr>
+      <th>Fruit</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Apple</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Banana</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Orange</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+document.getElementById('filterSelect').addEventListener('change', function() {
+  var filterValue = this.value.toLowerCase();
+  var rows = document.querySelectorAll('#dataTable tbody tr');
+
+  rows.forEach(function(row) {
+    var fruit = row.cells[0].textContent.toLowerCase();
+    if (fruit.includes(filterValue) || filterValue === '') {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
